@@ -1,32 +1,31 @@
 <?php
+require 'vendor/autoload.php'; 
 
-// Connect to MongoDB server
-$manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
 
-// Specify the database and collection names
-$databaseName = "my_database1";
-$collectionName = "my_collection";
+$mongoClient = new MongoDB\Client("mongodb://localhost:27017");
+$database = $mongoClient->selectDatabase('registration');
+$collection = $database->selectCollection('profiledetails');
 
-// Define database and collection options
-$options = [];
 
-// Create the database command
-$databaseCommand = new MongoDB\Driver\Command([
-    'create' => $databaseName,
-]);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
+    $name = $_POST['name'];
+    $gender = $_POST['gender'];
+    $dob =$_POST['dob'];
+    $phone = $_POST['phone'];
 
-// Execute the database command
-$manager->executeCommand('admin', $databaseCommand);
+    
+    $insertResult = $collection->insertOne([
+        'name' => $name,
+        'gender' => $gender,
+        'dob' => $dob,
+        'phone' => $phone
+    ]);
 
-echo "Database created successfully.";
-
-// Create the collection command
-$collectionCommand = new MongoDB\Driver\Command([
-    'create' => $collectionName,
-]);
-
-// Execute the collection command
-$manager->executeCommand($databaseName, $collectionCommand);
-
-echo "Collection created successfully.";
+    if ($insertResult->getInsertedCount() > 0) {
+        echo "Data inserted successfully!";
+    } else {
+        echo "Error inserting data!";
+    }
+}
 ?>
