@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/Register.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+</head>
+<body>
+    <div class="container">
+        <div id="title">
+            <h4>Sign Up</h4>
+            <p>Please fill this form to create an account</p>
+            <hr id="divider">
+        </div>
+        <div class="container-body">
+            <form  method="post" id="form">
+                <div class="name-field mb-3 form-group">
+                    <span class="field-title"><label for="name" class="form-label-sm">Name</label></span><br>
+                    <input type="text" name="name" id="name" class="form-control form-control-sm" placeholder="Eg:kamesh" required>
+                    <div class="error"></div>
+                </div>
+                
+                <div class="email-field mb-3 form-group">
+                    <span class="title-field"><label for="email" class="form-label-sm">Email</label></span><br>
+                    <input type="email" name="email" id="email" class="form-control form-control-sm" placeholder="Enter your Email address" required>
+                    <div class="error"></div>
+                </div>
+                <div class="password-field mb-3 form-group">
+                    <span class="filed-title"><label for="password" class="form-label-sm">Password</label></span><br>
+                    <input type="password" name="password" id="password" class="form-control form-control-sm" placeholder="More than 8 Characters" required>
+                    <div class="error"></div>
+                </div>
+                <div class="cpassword-field mb-3 form-group">
+                    <span class="field-title"><label for="cpassword" class="form-label-sm">Confirm Password</label></span><br>
+                    <input type="password" name="cpassword" id="cpassword" class="form-control form-control-sm" placeholder="Confirm the Password" required>
+                    <div class="error"></div>
+                </div>
+                <div class="agree-box form-check mb-3 form-group">
+                    <input class="form-check-input" type="checkbox" value="true" id="agree" name="agree-checkbox">
+                    <label class="form-check-label" for="agree">I agree</label>
+                    <div class="error"></div>
+                </div>
+                <div class="submit-button mb-3 d-grid gap-2 mx-auto form-group">
+                    <input type="submit" id="signup-button" onclick="event" class="btn btn-primary" value="Sign Up" name="submit" disabled>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="js/Register.js"></script>
+</body>
+</html>
+
+
+
