@@ -3,8 +3,8 @@ require 'vendor/autoload.php';
 
 
 $mongoClient = new MongoDB\Client("mongodb://localhost:27017");
-$database = $mongoClient->selectDatabase('registration');
-$collection = $database->selectCollection('profiledetails');
+$database_name = $mongoClient->selectDatabase('registration');
+$collection_name = $database_name->selectCollection('profiledetails');
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone = $_POST['phone'];
 
     
-    $insertResult = $collection->insertOne([
+    $insertResult = $collection_name->insertOne([
         'name' => $name,
         'gender' => $gender,
         'dob' => $dob,
@@ -23,9 +23,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ]);
 
     if ($insertResult->getInsertedCount() > 0) {
-        echo "Data inserted successfully!";
-    } else {
-        echo "Error inserting data!";
+        $cursor = $collection_name->find();
+
+        
+        echo '<div class="container">';
+        echo '<div id="profile-container">';
+        echo '<h4>Profile Details</h4>';
+
+        
+            echo '<div class="profile-details">';
+            echo '<p><strong>Name:</strong> '. $name .'</p>';
+            echo '<p><strong>Gender:</strong>'. $gender.'</p>';
+            echo '<p><strong>Birthday:</strong>'. $dob.'</p>';
+            echo '<p><strong>Phone Number:</strong> ' . $phone. '</p>';
+            echo '</div>';
+        
+
+        echo '</div>';
+        echo '</div>';
     }
+    else{
+        echo 'Error in inserting the data';
+    }
+
 }
 ?>
